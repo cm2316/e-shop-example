@@ -1,0 +1,30 @@
+@(form: Form[(String, String)])(implicit flash: Flash)
+
+@main("登陆") {
+
+    @helper.form(routes.Login.authenticate) {
+        <h1>登陆</h1>
+
+        @form.globalError.map { error =>
+            <p>
+                @error.message
+            </p>
+        }
+
+        @flash.get("success").map { message =>
+            <p>
+                @message
+            </p>
+        }
+
+        <p>
+            <input type="email" name="email" placeholder="Email" id="email" value="@form("email").value">
+        </p>
+        <p>
+            <input type="password" name="password" id="password" placeholder="Password">
+        </p>
+        <p>
+            <button type="submit" id="loginbutton">登陆</button>
+        </p>
+    }
+}
